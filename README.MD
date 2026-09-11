@@ -1,21 +1,5 @@
-<p align="center">
 
-  <a href="https://voidfullstack.com/">
-
-    <img
-
-      src="./Logo_Void_Full_Stack.svg"
-
-      alt="Void Full Stack"
-
-      width="720"
-
-    >
-
-  </a>
-
-</p>
-
+[![Void Full Stack](./Logo_Void_Full_Stack.svg)](https://voidfullstack.com/)
 
 # Void Full Stack
 
