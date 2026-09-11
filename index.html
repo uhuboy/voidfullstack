@@ -1091,6 +1091,19 @@
         transform: none;
       }
     }
+    .brand-logo {
+      display: block;
+      max-width: 200px; /* ปรับค่านี้ให้เล็กตามต้องการ */
+      width: 100%;      /* ทำให้โลโก้ปรับตัวตามพื้นที่ */
+      height: auto;     /* รักษาอัตราส่วนรูปไม่ให้เบี้ยว */
+    }
+    
+    /* ปรับให้เล็กลงอีกบนหน้าจอมือถือ */
+    @media (max-width: 480px) {
+      .brand-logo {
+        max-width: 150px; 
+      }
+    }
   </style>
 </head>
 
@@ -1100,9 +1113,7 @@
   <nav class="navigation" id="navigation" aria-label="เมนูหลัก">
     <div class="container navigation-inner">
       <a class="brand" href="#home" aria-label="Void Full Stack หน้าแรก">
-        
-        <img src="./Logo_Void_Full_Stack.svg" alt="Void Full Stack — เขียนได้ทุกภาษา แต่จำโค้ดไม่ได้เลย" width="480" height="120" >
-        
+        <img src="./Logo_Void_Full_Stack.svg" alt="Void Full Stack" class="brand-logo">      
       </a>
 
       <button
