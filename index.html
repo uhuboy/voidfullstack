@@ -1,1 +1,1675 @@
 
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Void Full Stack — เขียนได้ทุกภาษา แต่จำโค้ดไม่ได้เลย</title>
+
+  <meta
+    name="description"
+    content="Void Full Stack พัฒนาเว็บไซต์ ระบบภายในองค์กร งานฐานข้อมูล งานเซิร์ฟเวอร์ และให้คำปรึกษาด้านไอที โดยชัยวัฒน์ รุจิเมธาภาส"
+  >
+  <meta
+    name="keywords"
+    content="Full Stack Developer, Freelance Programmer, React, Python, PHP, C#, Database, IT Support, Void Full Stack"
+  >
+  <meta name="author" content="ชัยวัฒน์ รุจิเมธาภาส">
+  <meta name="theme-color" content="#080b10">
+
+  <meta property="og:title" content="Void Full Stack">
+  <meta
+    property="og:description"
+    content="เขียนได้ทุกภาษา แต่จำโค้ดไม่ได้เลย — พัฒนาเว็บไซต์ ระบบภายในองค์กร และแบ่งปันความรู้ไอทีจากศูนย์จนทำเป็น"
+  >
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://voidfullstack.com">
+
+  <link rel="canonical" href="https://voidfullstack.com">
+
+  <style>
+    :root {
+      --background: #07090d;
+      --background-soft: #0c1017;
+      --surface: rgba(14, 19, 27, 0.78);
+      --surface-solid: #0e131b;
+      --surface-hover: #121a24;
+      --border: rgba(255, 255, 255, 0.09);
+      --border-active: rgba(76, 255, 169, 0.38);
+      --text: #f2f5f7;
+      --muted: #96a0ad;
+      --green: #4cffa9;
+      --green-soft: rgba(76, 255, 169, 0.12);
+      --cyan: #50d9ff;
+      --purple: #aa87ff;
+      --orange: #ffba69;
+      --danger: #ff6f91;
+      --shadow: 0 28px 80px rgba(0, 0, 0, 0.42);
+      --radius: 22px;
+      --radius-small: 14px;
+      --container: 1180px;
+      --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 10%, rgba(76, 255, 169, 0.08), transparent 28%),
+        radial-gradient(circle at 85% 20%, rgba(80, 217, 255, 0.07), transparent 25%),
+        radial-gradient(circle at 50% 90%, rgba(170, 135, 255, 0.06), transparent 30%),
+        var(--background);
+      font-family: var(--font-sans);
+      line-height: 1.7;
+    }
+
+    body::before {
+      position: fixed;
+      z-index: -1;
+      inset: 0;
+      pointer-events: none;
+      content: "";
+      opacity: 0.25;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: linear-gradient(to bottom, black, transparent 90%);
+    }
+
+    ::selection {
+      color: #031109;
+      background: var(--green);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .container {
+      width: min(calc(100% - 40px), var(--container));
+      margin-inline: auto;
+    }
+
+    .skip-link {
+      position: fixed;
+      z-index: 9999;
+      top: 12px;
+      left: 12px;
+      padding: 10px 14px;
+      color: #031109;
+      background: var(--green);
+      border-radius: 8px;
+      transform: translateY(-150%);
+      transition: transform 0.2s ease;
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
+    .navigation {
+      position: fixed;
+      z-index: 1000;
+      top: 0;
+      right: 0;
+      left: 0;
+      border-bottom: 1px solid transparent;
+      transition:
+        background 0.25s ease,
+        border-color 0.25s ease,
+        backdrop-filter 0.25s ease;
+    }
+
+    .navigation.scrolled {
+      background: rgba(7, 9, 13, 0.82);
+      border-color: var(--border);
+      backdrop-filter: blur(18px);
+    }
+
+    .navigation-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 72px;
+    }
+
+    .brand {
+      display: inline-flex;
+      gap: 12px;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 0.92rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .brand-symbol {
+      display: grid;
+      width: 38px;
+      height: 38px;
+      color: var(--green);
+      background: var(--green-soft);
+      border: 1px solid var(--border-active);
+      border-radius: 11px;
+      place-items: center;
+    }
+
+    .brand-domain {
+      color: var(--muted);
+    }
+
+    .brand-domain strong {
+      color: var(--text);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      list-style: none;
+    }
+
+    .nav-links a {
+      display: block;
+      padding: 8px 12px;
+      color: var(--muted);
+      border-radius: 9px;
+      font-size: 0.9rem;
+      transition:
+        color 0.2s ease,
+        background 0.2s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.05);
+      outline: none;
+    }
+
+    .nav-contact {
+      color: var(--green) !important;
+      border: 1px solid var(--border-active);
+    }
+
+    .menu-button {
+      display: none;
+      width: 42px;
+      height: 42px;
+      color: var(--text);
+      cursor: pointer;
+      background: var(--surface-solid);
+      border: 1px solid var(--border);
+      border-radius: 11px;
+    }
+
+    .hero {
+      display: grid;
+      min-height: 100vh;
+      padding: 130px 0 80px;
+      align-items: center;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(420px, 0.92fr);
+      gap: 64px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      gap: 9px;
+      align-items: center;
+      margin-bottom: 22px;
+      padding: 7px 12px;
+      color: var(--green);
+      background: var(--green-soft);
+      border: 1px solid var(--border-active);
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      background: var(--green);
+      border-radius: 50%;
+      box-shadow: 0 0 18px var(--green);
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      50% {
+        opacity: 0.42;
+        transform: scale(0.8);
+      }
+    }
+
+    .hero h1 {
+      max-width: 790px;
+      margin-bottom: 23px;
+      font-size: clamp(3.2rem, 8vw, 7rem);
+      line-height: 0.92;
+      letter-spacing: -0.075em;
+    }
+
+    .hero h1 .void {
+      display: block;
+      color: transparent;
+      background: linear-gradient(110deg, var(--green), var(--cyan), var(--purple));
+      background-clip: text;
+      -webkit-background-clip: text;
+    }
+
+    .hero-description {
+      max-width: 680px;
+      color: var(--muted);
+      font-size: clamp(1rem, 2vw, 1.14rem);
+    }
+
+    .hero-description strong {
+      color: var(--text);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .button {
+      display: inline-flex;
+      gap: 9px;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 19px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      font-weight: 700;
+      transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        background 0.2s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .button-primary {
+      color: #04120b;
+      background: var(--green);
+      border-color: var(--green);
+      box-shadow: 0 10px 40px rgba(76, 255, 169, 0.15);
+    }
+
+    .button-secondary {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .button-secondary:hover {
+      background: rgba(255, 255, 255, 0.07);
+      border-color: rgba(255, 255, 255, 0.16);
+    }
+
+    .tiny-note {
+      margin-top: 17px;
+      color: #697482;
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+    }
+
+    .terminal {
+      overflow: hidden;
+      background: rgba(8, 12, 17, 0.88);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      transform: perspective(1000px) rotateY(-3deg) rotateX(1deg);
+    }
+
+    .terminal-bar {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      padding: 14px 16px;
+      background: #11161e;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .terminal-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .terminal-dot:nth-child(1) {
+      background: #ff667d;
+    }
+
+    .terminal-dot:nth-child(2) {
+      background: #ffbd55;
+    }
+
+    .terminal-dot:nth-child(3) {
+      background: #57d987;
+    }
+
+    .terminal-title {
+      margin-left: 7px;
+      color: #707b89;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+    }
+
+    .terminal-body {
+      min-height: 370px;
+      padding: 24px;
+      font-family: var(--font-mono);
+      font-size: 0.87rem;
+      line-height: 1.9;
+    }
+
+    .terminal-line {
+      display: block;
+    }
+
+    .code-green {
+      color: var(--green);
+    }
+
+    .code-cyan {
+      color: var(--cyan);
+    }
+
+    .code-purple {
+      color: var(--purple);
+    }
+
+    .code-orange {
+      color: var(--orange);
+    }
+
+    .code-muted {
+      color: #66717f;
+    }
+
+    .terminal-cursor {
+      display: inline-block;
+      width: 8px;
+      height: 16px;
+      vertical-align: -3px;
+      background: var(--green);
+      animation: blink 0.9s step-end infinite;
+    }
+
+    @keyframes blink {
+      50% {
+        opacity: 0;
+      }
+    }
+
+    .section {
+      padding: 105px 0;
+    }
+
+    .section-header {
+      display: grid;
+      grid-template-columns: 0.7fr 1.3fr;
+      gap: 50px;
+      margin-bottom: 50px;
+      align-items: end;
+    }
+
+    .section-index {
+      margin-bottom: 12px;
+      color: var(--green);
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3.7rem);
+      line-height: 1.08;
+      letter-spacing: -0.055em;
+    }
+
+    .section-intro {
+      max-width: 680px;
+      color: var(--muted);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 20px;
+    }
+
+    .card {
+      position: relative;
+      overflow: hidden;
+      padding: 30px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      transition:
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        background 0.25s ease;
+    }
+
+    .card:hover {
+      background: rgba(18, 25, 35, 0.9);
+      border-color: rgba(76, 255, 169, 0.22);
+      transform: translateY(-4px);
+    }
+
+    .card-label {
+      margin-bottom: 18px;
+      color: var(--green);
+      font-family: var(--font-mono);
+      font-size: 0.77rem;
+    }
+
+    .card h3 {
+      margin-bottom: 12px;
+      font-size: 1.45rem;
+      line-height: 1.35;
+      letter-spacing: -0.025em;
+    }
+
+    .card p {
+      color: var(--muted);
+    }
+
+    .quote-card {
+      display: flex;
+      min-height: 100%;
+      flex-direction: column;
+      justify-content: space-between;
+      background:
+        linear-gradient(145deg, rgba(76, 255, 169, 0.11), transparent 55%),
+        var(--surface);
+    }
+
+    .big-quote {
+      margin-bottom: 35px;
+      font-size: clamp(1.7rem, 3.5vw, 2.8rem);
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.05em;
+    }
+
+    .big-quote span {
+      color: var(--green);
+    }
+
+    .profile-list {
+      list-style: none;
+    }
+
+    .profile-list li {
+      display: flex;
+      justify-content: space-between;
+      padding: 13px 0;
+      border-bottom: 1px solid var(--border);
+      gap: 20px;
+    }
+
+    .profile-list li:last-child {
+      border-bottom: 0;
+    }
+
+    .profile-list span:first-child {
+      color: var(--muted);
+    }
+
+    .profile-list span:last-child {
+      text-align: right;
+      font-weight: 700;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .project-card {
+      min-height: 310px;
+    }
+
+    .project-number {
+      display: grid;
+      width: 42px;
+      height: 42px;
+      margin-bottom: 52px;
+      color: var(--green);
+      background: var(--green-soft);
+      border: 1px solid var(--border-active);
+      border-radius: 12px;
+      font-family: var(--font-mono);
+      place-items: center;
+    }
+
+    .project-card h3 {
+      font-size: 1.3rem;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 22px;
+      list-style: none;
+    }
+
+    .tag {
+      padding: 5px 9px;
+      color: #aeb8c4;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+    }
+
+    .notice {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      margin-bottom: 24px;
+      padding: 16px 18px;
+      color: #b9c4cf;
+      background: rgba(255, 186, 105, 0.07);
+      border: 1px solid rgba(255, 186, 105, 0.18);
+      border-radius: 14px;
+      font-size: 0.9rem;
+    }
+
+    .notice strong {
+      color: var(--orange);
+    }
+
+    .stack-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .stack-card {
+      min-height: 300px;
+    }
+
+    .stack-icon {
+      display: grid;
+      width: 48px;
+      height: 48px;
+      margin-bottom: 35px;
+      color: var(--cyan);
+      background: rgba(80, 217, 255, 0.09);
+      border: 1px solid rgba(80, 217, 255, 0.2);
+      border-radius: 13px;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      place-items: center;
+    }
+
+    .skill-list {
+      margin-top: 18px;
+      list-style: none;
+    }
+
+    .skill-list li {
+      position: relative;
+      padding: 7px 0 7px 19px;
+      color: #b3bdc8;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+    }
+
+    .skill-list li::before {
+      position: absolute;
+      left: 0;
+      color: var(--green);
+      content: ">";
+    }
+
+    .focus-panel {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 30px;
+      align-items: center;
+      padding: 44px;
+      background:
+        linear-gradient(130deg, rgba(170, 135, 255, 0.09), transparent 50%),
+        var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+
+    .focus-side {
+      text-align: center;
+    }
+
+    .focus-kicker {
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+    }
+
+    .focus-name {
+      margin-top: 7px;
+      font-size: clamp(1.5rem, 3vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .focus-detail {
+      margin-top: 8px;
+      color: var(--muted);
+    }
+
+    .focus-plus {
+      color: var(--green);
+      font-family: var(--font-mono);
+      font-size: 2rem;
+    }
+
+    .lab-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 20px;
+    }
+
+    .phone-visual {
+      display: grid;
+      min-height: 460px;
+      background:
+        radial-gradient(circle at center, rgba(76, 255, 169, 0.12), transparent 42%),
+        var(--surface);
+      place-items: center;
+    }
+
+    .phone {
+      position: relative;
+      width: 220px;
+      height: 310px;
+      padding: 12px;
+      background: #030508;
+      border: 1px solid #35404d;
+      border-radius: 24px;
+      box-shadow:
+        0 30px 70px rgba(0, 0, 0, 0.55),
+        inset 0 0 0 3px #0b1017;
+      transform: rotate(-4deg);
+    }
+
+    .phone-screen {
+      display: flex;
+      height: 100%;
+      padding: 20px 14px;
+      background:
+        linear-gradient(rgba(76, 255, 169, 0.04) 1px, transparent 1px),
+        #080d12;
+      background-size: 100% 19px;
+      border-radius: 15px;
+      flex-direction: column;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+    }
+
+    .phone-screen strong {
+      margin-bottom: 12px;
+      color: var(--green);
+      font-size: 0.95rem;
+    }
+
+    .phone-screen span {
+      color: #768391;
+    }
+
+    .phone-screen .running {
+      margin-top: 15px;
+      color: var(--cyan);
+    }
+
+    .lab-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .lab-content h3 {
+      max-width: 570px;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+    }
+
+    .lab-content p {
+      margin-top: 18px;
+    }
+
+    .lab-points {
+      display: grid;
+      gap: 10px;
+      margin-top: 26px;
+      list-style: none;
+    }
+
+    .lab-points li {
+      padding: 13px 15px;
+      color: #b4bfca;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 11px;
+    }
+
+    .lab-points strong {
+      color: var(--green);
+      font-family: var(--font-mono);
+      font-size: 0.79rem;
+    }
+
+    .support-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .contact-section {
+      padding-bottom: 70px;
+    }
+
+    .contact-panel {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(34px, 7vw, 80px);
+      text-align: center;
+      background:
+        radial-gradient(circle at 50% 0, rgba(76, 255, 169, 0.14), transparent 45%),
+        var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 30px;
+    }
+
+    .contact-panel::before {
+      position: absolute;
+      top: -180px;
+      left: 50%;
+      width: 420px;
+      height: 420px;
+      pointer-events: none;
+      content: "";
+      background: var(--green);
+      border-radius: 50%;
+      opacity: 0.04;
+      filter: blur(70px);
+      transform: translateX(-50%);
+    }
+
+    .contact-panel h2 {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: clamp(2.3rem, 6vw, 5rem);
+      line-height: 1.05;
+      letter-spacing: -0.065em;
+    }
+
+    .contact-panel h2 span {
+      color: var(--green);
+    }
+
+    .contact-panel > p {
+      position: relative;
+      max-width: 650px;
+      margin: 22px auto 0;
+      color: var(--muted);
+    }
+
+    .contact-items {
+      position: relative;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 11px;
+      justify-content: center;
+      margin-top: 30px;
+    }
+
+    .contact-item {
+      padding: 12px 16px;
+      color: #c0c9d2;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      font-family: var(--font-mono);
+      font-size: 0.83rem;
+    }
+
+    .contact-item:hover {
+      color: var(--green);
+      border-color: var(--border-active);
+    }
+
+    .footer {
+      padding: 30px 0;
+      color: #697482;
+      border-top: 1px solid var(--border);
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition:
+        opacity 0.7s ease,
+        transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 960px) {
+      .hero-grid,
+      .about-grid,
+      .lab-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+      }
+
+      .hero-grid {
+        gap: 50px;
+      }
+
+      .terminal {
+        max-width: 680px;
+        transform: none;
+      }
+
+      .section-header {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+
+      .stack-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .phone-visual {
+        min-height: 390px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .navigation-inner {
+        min-height: 64px;
+      }
+
+      .menu-button {
+        display: grid;
+        place-items: center;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: 64px;
+        right: 20px;
+        left: 20px;
+        display: none;
+        padding: 12px;
+        background: rgba(11, 15, 21, 0.97);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(18px);
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-links a {
+        padding: 11px 13px;
+      }
+
+      .hero {
+        padding-top: 110px;
+      }
+
+      .hero h1 {
+        font-size: clamp(3rem, 16vw, 5rem);
+      }
+
+      .project-grid,
+      .stack-grid,
+      .support-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .focus-panel {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .focus-plus {
+        transform: rotate(45deg);
+      }
+
+      .project-number {
+        margin-bottom: 35px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        width: min(calc(100% - 28px), var(--container));
+      }
+
+      .brand-domain {
+        display: none;
+      }
+
+      .section {
+        padding: 80px 0;
+      }
+
+      .card,
+      .focus-panel {
+        padding: 23px;
+      }
+
+      .terminal-body {
+        min-height: 340px;
+        padding: 18px;
+        font-size: 0.76rem;
+      }
+
+      .hero-actions .button {
+        width: 100%;
+      }
+
+      .profile-list li {
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .profile-list span:last-child {
+        text-align: left;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">ข้ามไปยังเนื้อหาหลัก</a>
+
+  <nav class="navigation" id="navigation" aria-label="เมนูหลัก">
+    <div class="container navigation-inner">
+      <a class="brand" href="#home" aria-label="Void Full Stack หน้าแรก">
+        <span class="brand-symbol">&lt;/&gt;</span>
+        <span class="brand-domain"><strong>void</strong>fullstack.com</span>
+      </a>
+
+      <button
+        class="menu-button"
+        id="menuButton"
+        type="button"
+        aria-label="เปิดเมนู"
+        aria-expanded="false"
+        aria-controls="navLinks"
+      >
+        ☰
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">เกี่ยวกับ</a></li>
+        <li><a href="#work">ผลงาน</a></li>
+        <li><a href="#stack">ความเชี่ยวชาญ</a></li>
+        <li><a href="#lab">Void Lab</a></li>
+        <li><a class="nav-contact" href="#contact">ทักมาคุยกัน</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main id="main">
+    <header class="hero" id="home">
+      <div class="container hero-grid">
+        <div class="hero-content reveal">
+          <div class="eyebrow">
+            <span class="status-dot"></span>
+            AVAILABLE FOR FREELANCE WORK
+          </div>
+
+          <h1>
+            Make things
+            <span class="void">from Void.</span>
+          </h1>
+
+          <p class="hero-description">
+            พัฒนาเว็บไซต์ ระบบภายในองค์กร ฐานข้อมูล เซิร์ฟเวอร์
+            และแก้ปัญหาไอทีตั้งแต่หน้าจอผู้ใช้ไปจนถึงหลังบ้าน
+            เพราะเชื่อว่า <strong>การเขียนโปรแกรมทำได้แทบทุกอย่าง</strong>
+            ถ้าเรายังไม่หยุดค้นหาและลงมือทำ
+          </p>
+
+          <div class="hero-actions">
+            <a class="button button-primary" href="#contact">
+              เริ่มต้นโปรเจกต์ <span aria-hidden="true">→</span>
+            </a>
+            <a class="button button-secondary" href="#work">
+              ดูงานที่ผ่านมา
+            </a>
+          </div>
+
+          <p class="tiny-note">
+            // เขียนได้ทุกภาษา แต่จำโค้ดไม่ได้เลย
+          </p>
+        </div>
+
+        <div class="terminal reveal" aria-label="ตัวอย่างหน้าต่าง Terminal">
+          <div class="terminal-bar">
+            <span class="terminal-dot"></span>
+            <span class="terminal-dot"></span>
+            <span class="terminal-dot"></span>
+            <span class="terminal-title">ken@voidfullstack: ~/work</span>
+          </div>
+
+          <div class="terminal-body">
+            <span class="terminal-line">
+              <span class="code-green">$</span> whoami
+            </span>
+            <span class="terminal-line code-cyan">
+              ชัยวัฒน์ รุจิเมธาภาส (เคน)
+            </span>
+            <br>
+
+            <span class="terminal-line">
+              <span class="code-green">$</span> void --mission
+            </span>
+            <span class="terminal-line code-muted">
+              เรียนรู้ → ลงมือทำ → แก้ปัญหา → แบ่งปัน
+            </span>
+            <br>
+
+            <span class="terminal-line">
+              <span class="code-green">$</span> npm run everything
+            </span>
+            <span class="terminal-line">
+              <span class="code-purple">frontend</span>
+              <span class="code-muted">........</span>
+              <span class="code-green">ready</span>
+            </span>
+            <span class="terminal-line">
+              <span class="code-purple">backend</span>
+              <span class="code-muted">.........</span>
+              <span class="code-green">ready</span>
+            </span>
+            <span class="terminal-line">
+              <span class="code-purple">database</span>
+              <span class="code-muted">........</span>
+              <span class="code-green">ready</span>
+            </span>
+            <span class="terminal-line">
+              <span class="code-purple">server</span>
+              <span class="code-muted">..........</span>
+              <span class="code-green">ready</span>
+            </span>
+            <span class="terminal-line">
+              <span class="code-purple">coffee</span>
+              <span class="code-muted">..........</span>
+              <span class="code-orange">required</span>
+            </span>
+            <br>
+
+            <span class="terminal-line">
+              <span class="code-green">$</span> _
+              <span class="terminal-cursor"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section-header reveal">
+          <div>
+            <p class="section-index">01 / ABOUT VOID</p>
+            <h2 class="section-title">พื้นที่ที่เริ่มจากศูนย์ แล้วค่อย ๆ ทำจนเป็น</h2>
+          </div>
+
+          <p class="section-intro">
+            Void Full Stack คือพื้นที่ทำงาน ทดลอง และแบ่งปันความรู้ด้านไอที
+            เน้นการนำเทคโนโลยีมาแก้ปัญหาจริงแบบไม่ยึดติดกับภาษาใดภาษาหนึ่ง
+            งานเล็กหรืองานใหญ่ หากช่วยให้คนทำงานง่ายขึ้นก็น่าสนุกทั้งนั้น
+          </p>
+        </div>
+
+        <div class="about-grid">
+          <article class="card quote-card reveal">
+            <div>
+              <p class="card-label">// PHILOSOPHY</p>
+              <p class="big-quote">
+                “เขียนได้ทุกภาษา<br>
+                แต่<span>จำโค้ดไม่ได้เลย</span>”
+              </p>
+            </div>
+
+            <p>
+              ไม่จำเป็นต้องจำทุกคำสั่ง ขอแค่เข้าใจปัญหา รู้ว่าจะค้นหาอะไร
+              และอดทนพอที่จะทำให้มันใช้งานได้จริง
+            </p>
+          </article>
+
+          <article class="card reveal">
+            <p class="card-label">// PROFILE.JSON</p>
+            <ul class="profile-list">
+              <li>
+                <span>ชื่อ</span>
+                <span>ชัยวัฒน์ รุจิเมธาภาส</span>
+              </li>
+              <li>
+                <span>ชื่อเล่น</span>
+                <span>เคน</span>
+              </li>
+              <li>
+                <span>บทบาท</span>
+                <span>Freelance Full Stack</span>
+              </li>
+              <li>
+                <span>แนวทาง</span>
+                <span>สนุกกับงานและทำเต็มที่</span>
+              </li>
+              <li>
+                <span>สถานะ</span>
+                <span style="color: var(--green);">พร้อมรับงาน</span>
+              </li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="work">
+      <div class="container">
+        <div class="section-header reveal">
+          <div>
+            <p class="section-index">02 / SELECTED WORK</p>
+            <h2 class="section-title">ระบบที่เคยลงมือทำ</h2>
+          </div>
+
+          <p class="section-intro">
+            ผลงานส่วนใหญ่เป็นระบบที่พัฒนาตามความต้องการของลูกค้าแต่ละราย
+            ตั้งแต่เว็บไซต์บริษัทไปจนถึงระบบที่เชื่อมต่ออุปกรณ์และบริการคลาวด์
+          </p>
+        </div>
+
+        <div class="notice reveal">
+          <span aria-hidden="true">ⓘ</span>
+          <p>
+            <strong>หมายเหตุ:</strong>
+            งานทั้งหมดเป็นงานรับจ้างพัฒนาตามโจทย์ ไม่ใช่ซอฟต์แวร์สำเร็จรูปที่เปิดขายทั่วไป
+          </p>
+        </div>
+
+        <div class="project-grid">
+          <article class="card project-card reveal">
+            <span class="project-number">01</span>
+            <h3>เว็บไซต์บริษัทและร้านค้า</h3>
+            <p>
+              พัฒนาเว็บไซต์สำหรับสำนักงานบัญชี บริษัทต่อเติมและตกแต่งบ้านหรือสำนักงาน
+              ธุรกิจพัดลมไอเย็น อุปกรณ์เลี้ยงปลาสวยงาม และธุรกิจเสื้อผ้า
+              โดยเน้นข้อมูลอ่านง่าย รองรับมือถือ และดูแลต่อได้สะดวก
+            </p>
+            <ul class="tag-list">
+              <li class="tag">Corporate Website</li>
+              <li class="tag">Responsive</li>
+              <li class="tag">CMS</li>
+            </ul>
+          </article>
+
+          <article class="card project-card reveal">
+            <span class="project-number">02</span>
+            <h3>ระบบจองห้องประชุม</h3>
+            <p>
+              จัดการตารางจองห้อง ตรวจสอบช่วงเวลาว่าง ออกใบเสนอราคาและใบเสร็จ
+              พร้อมบันทึกข้อมูลการชำระเงิน เพื่อช่วยลดขั้นตอนงานเอกสารและข้อมูลซ้ำซ้อน
+            </p>
+            <ul class="tag-list">
+              <li class="tag">Booking</li>
+              <li class="tag">Quotation</li>
+              <li class="tag">Payment</li>
+            </ul>
+          </article>
+
+          <article class="card project-card reveal">
+            <span class="project-number">03</span>
+            <h3>ระบบเคส เคลม และงานซ่อม</h3>
+            <p>
+              บันทึกและติดตามสถานะเคส ตรวจสอบประวัติการเคลม
+              จัดทำใบเสนอราคาซ่อม และช่วยให้ทีมงานค้นหาข้อมูลย้อนหลังได้จากจุดเดียว
+            </p>
+            <ul class="tag-list">
+              <li class="tag">Case Tracking</li>
+              <li class="tag">Claim</li>
+              <li class="tag">Repair</li>
+            </ul>
+          </article>
+
+          <article class="card project-card reveal">
+            <span class="project-number">04</span>
+            <h3>ระบบอ่านป้ายทะเบียนรถ</h3>
+            <p>
+              อ่านข้อมูลป้ายทะเบียนจากวิดีโอที่บันทึกไว้
+              ประมวลผลผ่านบริการคลาวด์ และจัดเก็บรูปภาพ
+              เลขทะเบียน รวมถึงข้อมูลที่เกี่ยวข้องลงฐานข้อมูลสำหรับค้นหาในภายหลัง
+            </p>
+            <ul class="tag-list">
+              <li class="tag">Computer Vision</li>
+              <li class="tag">Cloud API</li>
+              <li class="tag">Database</li>
+            </ul>
+          </article>
+
+          <article class="card project-card reveal">
+            <span class="project-number">05</span>
+            <h3>ระบบติดตามอุปกรณ์ด้วย Beacon</h3>
+            <p>
+              รับข้อมูลจากอุปกรณ์ Beacon ผ่าน MQTT และแสดงผลบนแดชบอร์ด
+              รองรับ MAC Address, RSSI, Battery และ Timestamp
+              พร้อมระบุตำแหน่งข้อมูลบนแผนผังสำนักงาน
+            </p>
+            <ul class="tag-list">
+              <li class="tag">Beacon</li>
+              <li class="tag">MQTT</li>
+              <li class="tag">Dashboard</li>
+              <li class="tag">Floor Plan</li>
+            </ul>
+          </article>
+
+          <article class="card project-card reveal">
+            <span class="project-number">06</span>
+            <h3>ระบบเฉพาะทางตามกระบวนการทำงาน</h3>
+            <p>
+              วิเคราะห์ปัญหาเดิมขององค์กรแล้วออกแบบระบบให้สอดคล้องกับขั้นตอนทำงานจริง
+              เน้นลดงานซ้ำ ลดความผิดพลาด และทำให้ข้อมูลที่กระจัดกระจายกลับมาใช้งานร่วมกันได้
+            </p>
+            <ul class="tag-list">
+              <li class="tag">Custom Software</li>
+              <li class="tag">Automation</li>
+              <li class="tag">Integration</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="support">
+      <div class="container">
+        <div class="section-header reveal">
+          <div>
+            <p class="section-index">03 / IT SUPPORT</p>
+            <h2 class="section-title">ไม่ได้มีแค่เขียนโปรแกรม</h2>
+          </div>
+
+          <p class="section-intro">
+            ให้บริการดูแลและให้คำปรึกษาด้านไอทีแก่สำนักงานบัญชีและบริษัททั่วไป
+            ทั้งการแก้ปัญหารายวัน การดูแลระบบ และการเชื่อมต่อสำหรับทำงานจากระยะไกล
+          </p>
+        </div>
+
+        <div class="support-grid">
+          <article class="card reveal">
+            <p class="card-label">// REMOTE SUPPORT</p>
+            <h3>รีโมตตรวจสอบและแก้ไขปัญหา</h3>
+            <p>
+              ช่วยตรวจสอบปัญหาคอมพิวเตอร์และซอฟต์แวร์จากระยะไกล
+              ลดเวลารอและช่วยให้ผู้ใช้งานกลับมาทำงานต่อได้เร็วขึ้น
+            </p>
+          </article>
+
+          <article class="card reveal">
+            <p class="card-label">// DATABASE CARE</p>
+            <h3>ดูแลรักษาฐานข้อมูล</h3>
+            <p>
+              ตรวจสอบการทำงาน สำรองข้อมูล แนะนำแนวทางจัดเก็บ
+              และช่วยแก้ปัญหาที่เกิดขึ้นกับระบบฐานข้อมูลขององค์กร
+            </p>
+          </article>
+
+          <article class="card reveal">
+            <p class="card-label">// NETWORK</p>
+            <h3>ให้คำแนะนำด้านเครือข่าย</h3>
+            <p>
+              ตรวจสอบและให้คำแนะนำเกี่ยวกับระบบเครือข่ายภายใน
+              การเชื่อมต่ออินเทอร์เน็ต และการเข้าถึงทรัพยากรขององค์กร
+            </p>
+          </article>
+
+          <article class="card reveal">
+            <p class="card-label">// VPN & REMOTE DESKTOP</p>
+            <h3>VPN และ Remote Desktop</h3>
+            <p>
+              ติดตั้งและตั้งค่าการเชื่อมต่อสำหรับทำงานจากภายนอก
+              โดยคำนึงถึงความสะดวก ความเหมาะสม และความปลอดภัยของระบบ
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="stack">
+      <div class="container">
+        <div class="section-header reveal">
+          <div>
+            <p class="section-index">04 / TOOLBOX</p>
+            <h2 class="section-title">พอทำได้หลายอย่าง แต่ยังไม่กล้าเก่งสักอย่าง</h2>
+          </div>
+
+          <p class="section-intro">
+            ผ่านการทำงานกับหลายระบบ หลายภาษา และหลายฐานข้อมูล
+            ระดับความเชี่ยวชาญอาจไม่ถึงขั้นตอบได้ทุกอย่างโดยไม่เปิดเอกสาร
+            แต่พร้อมเรียนรู้ ค้นหา ทดลอง และรับผิดชอบจนงานเดินต่อได้
+          </p>
+        </div>
+
+        <div class="stack-grid">
+          <article class="card stack-card reveal">
+            <span class="stack-icon">OS</span>
+            <h3>Server & Operating System</h3>
+            <p>เคยติดตั้ง ดูแล และแก้ปัญหาระบบเซิร์ฟเวอร์หลายสภาพแวดล้อม</p>
+            <ul class="skill-list">
+              <li>Windows Server</li>
+              <li>Ubuntu Linux Server</li>
+              <li>Solaris Unix Server</li>
+            </ul>
+          </article>
+
+          <article class="card stack-card reveal">
+            <span class="stack-icon">DB</span>
+            <h3>Database</h3>
+            <p>ออกแบบ เชื่อมต่อ ดูแล และแก้ปัญหาฐานข้อมูลตามรูปแบบของแต่ละงาน</p>
+            <ul class="skill-list">
+              <li>Oracle Database</li>
+              <li>Microsoft SQL Server</li>
+              <li>MySQL Server</li>
+              <li>PostgreSQL</li>
+              <li>SQLite</li>
+            </ul>
+          </article>
+
+          <article class="card stack-card reveal">
+            <span class="stack-icon">{ }</span>
+            <h3>Programming</h3>
+            <p>เลือกภาษาและเครื่องมือให้เหมาะกับโจทย์ มากกว่าบังคับทุกงานให้ใช้ของเดิม</p>
+            <ul class="skill-list">
+              <li>C# / VB.NET</li>
+              <li>PHP</li>
+              <li>Python</li>
+              <li>JavaScript</li>
+              <li>React / React Native</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="focus">
+      <div class="container">
+        <div class="section-header reveal">
+          <div>
+            <p class="section-index">05 / CURRENT FOCUS</p>
+            <h2 class="section-title">เครื่องมือที่กำลังสนใจ</h2>
+          </div>
+
+          <p class="section-intro">
+            กำลังให้ความสำคัญกับการพัฒนาเว็บสมัยใหม่
+            โดยแยกส่วนหน้าบ้านและหลังบ้านให้ชัดเจน เพื่อดูแล ทดสอบ
+            และต่อยอดระบบได้สะดวกขึ้น
+          </p>
+        </div>
+
+        <div class="focus-panel reveal">
+          <div class="focus-side">
+            <p class="focus-kicker">FRONTEND</p>
+            <p class="focus-name">React + Vite</p>
+            <p class="focus-detail">JavaScript, Responsive UI และประสบการณ์ผู้ใช้</p>
+          </div>
+
+          <span class="focus-plus" aria-hidden="true">+</span>
+
+          <div class="focus-side">
+            <p class="focus-kicker">BACKEND</p>
+            <p class="focus-name">Python</p>
+            <p class="focus-detail">API, Automation, Data Processing และ AI Integration</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="lab">
+      <div class="container">
+        <div class="section-header reveal">
+          <div>
+            <p class="section-index">06 / VOID LAB</p>
+            <h2 class="section-title">เปลี่ยนมือถือเรือธงตกรุ่นให้เป็น AI ขนาดพกพา</h2>
+          </div>
+
+          <p class="section-intro">
+            งานอดิเรกที่กำลังทดลองคือการนำฮาร์ดแวร์เก่าที่ยังมีประสิทธิภาพ
+            กลับมาใช้ประโยชน์ ลดการพึ่งพาบริการคลาวด์
+            และเปิดโอกาสให้สร้างระบบ AI ที่ทำงานภายในอุปกรณ์ได้
+          </p>
+        </div>
+
+        <div class="lab-grid">
+          <div class="card phone-visual reveal" aria-hidden="true">
+            <div class="phone">
+              <div class="phone-screen">
+                <strong>VOID LOCAL AI</strong>
+                <span>device: fold-series</span>
+                <span>ram: 12 GB</span>
+                <span>compute: snapdragon 8</span>
+                <span>runtime: llama.cpp / mnn-llm</span>
+                <span class="running">● model running locally</span>
+              </div>
+            </div>
+          </div>
+
+          <article class="card lab-content reveal">
+            <p class="card-label">// EXPERIMENTAL PROJECT</p>
+            <h3>Local AI ที่ไม่ต้องส่งข้อมูลทุกอย่างขึ้นคลาวด์</h3>
+
+            <p>
+              ทดลองใช้ Samsung Z Fold 2 และ Z Fold 5 ซึ่งมี RAM 12GB
+              และชิป Snapdragon 8 Series เพื่อรันโมเดลภาษาภายในเครื่อง
+              ผ่าน Llama.cpp หรือ MNN-LLM รวมถึงปรับแต่งโมเดลให้เหมาะกับอุปกรณ์
+            </p>
+
+            <p>
+              เป้าหมายคือการต่อยอดไปสู่โปรเจกต์ AI ที่ประหยัดค่าใช้บริการ
+              ใช้งานแบบออฟไลน์ได้ และช่วยเพิ่มความเป็นส่วนตัวของข้อมูล
+              เช่น โปรแกรมสแกนและอ่านข้อความจากใบเสร็จสำหรับใช้งานฟรี
+            </p>
+
+            <ul class="lab-points">
+              <li><strong>01.</strong> ใช้ฮาร์ดแวร์เดิมให้เกิดประโยชน์สูงสุด</li>
+              <li><strong>02.</strong> ลดค่าใช้จ่ายบริการ AI ภายนอก</li>
+              <li><strong>03.</strong> ประมวลผลข้อมูลภายในอุปกรณ์</li>
+              <li><strong>04.</strong> ทดลองก่อน แล้วค่อยพัฒนาเป็นของที่ใช้ได้จริง</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact-section" id="contact">
+      <div class="container">
+        <div class="contact-panel reveal">
+          <p class="section-index">07 / LET'S BUILD SOMETHING</p>
+
+          <h2>
+            มีโจทย์ไอทีอยู่หรือเปล่า?<br>
+            <span>ลองทักมาคุยกัน</span>
+          </h2>
+
+          <p>
+            ปัจจุบันทำงานแบบฟรีแลนซ์ พร้อมรับฟังโจทย์ใหม่
+            ไม่ว่าจะเป็นเว็บไซต์ ระบบใช้งานภายใน งานฐานข้อมูล
+            ระบบเชื่อมต่ออุปกรณ์ หรือปัญหาไอทีที่ยังไม่แน่ใจว่าควรเริ่มตรงไหน
+          </p>
+
+          <div class="contact-items">
+            <!-- เปลี่ยน PHONE_NUMBER เป็นเบอร์โทรจริงก่อนเผยแพร่ -->
+            <a class="contact-item" href="tel:PHONE_NUMBER">
+              โทร: 0632378010
+            </a>
+
+            <!-- เปลี่ยน EMAIL_ADDRESS เป็นอีเมลจริงก่อนเผยแพร่ -->
+            <a class="contact-item" href="mailto:EMAIL_ADDRESS">
+              อีเมล: voidfullstack@gmail.com
+            </a>
+          </div>
+
+          <p class="tiny-note">
+            // พร้อมทำงานมาก เพียงแค่ทักมานะ :)
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p>© <span id="currentYear"></span> Void Full Stack.</p>
+      <p>Designed & coded by Ken — with coffee, docs and search.</p>
+    </div>
+  </footer>
+
+  <script>
+    const navigation = document.getElementById("navigation");
+    const menuButton = document.getElementById("menuButton");
+    const navLinks = document.getElementById("navLinks");
+    const currentYear = document.getElementById("currentYear");
+    const revealElements = document.querySelectorAll(".reveal");
+
+    currentYear.textContent = new Date().getFullYear();
+
+    function updateNavigation() {
+      navigation.classList.toggle("scrolled", window.scrollY > 20);
+    }
+
+    updateNavigation();
+    window.addEventListener("scroll", updateNavigation, { passive: true });
+
+    menuButton.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+
+      menuButton.setAttribute("aria-expanded", String(isOpen));
+      menuButton.setAttribute(
+        "aria-label",
+        isOpen ? "ปิดเมนู" : "เปิดเมนู"
+      );
+      menuButton.textContent = isOpen ? "×" : "☰";
+    });
+
+    navLinks.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuButton.setAttribute("aria-expanded", "false");
+        menuButton.setAttribute("aria-label", "เปิดเมนู");
+        menuButton.textContent = "☰";
+      });
+    });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.1,
+        rootMargin: "0px 0px -40px 0px"
+      }
+    );
+
+    revealElements.forEach((element) => observer.observe(element));
+  </script>
+</body>
+</html>
