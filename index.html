@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="th">
 <head>
@@ -9,19 +8,19 @@
 
   <meta
     name="description"
-    content="Void Full Stack พัฒนาเว็บไซต์ ระบบภายในองค์กร งานฐานข้อมูล งานเซิร์ฟเวอร์ และให้คำปรึกษาด้านไอที โดยชัยวัฒน์ รุจิเมธาภาส"
+    content="Void Full Stack รับพัฒนาเว็บไซต์ ระบบภายในองค์กร งานฐานข้อมูล เซิร์ฟเวอร์ Virtualization เชื่อมต่อระบบ และให้คำปรึกษาด้านไอที โดยชัยวัฒน์ รุจิเมธาภาส"
   >
   <meta
     name="keywords"
-    content="Full Stack Developer, Freelance Programmer, React, Python, PHP, C#, Database, IT Support, Void Full Stack"
+    content="Full Stack Developer, Freelance Programmer, React, Python, PHP, C#, Database, IT Support, Hyper-V, VMware, Void Full Stack"
   >
   <meta name="author" content="ชัยวัฒน์ รุจิเมธาภาส">
-  <meta name="theme-color" content="#080b10">
+  <meta name="theme-color" content="#07090d">
 
   <meta property="og:title" content="Void Full Stack">
   <meta
     property="og:description"
-    content="เขียนได้ทุกภาษา แต่จำโค้ดไม่ได้เลย — พัฒนาเว็บไซต์ ระบบภายในองค์กร และแบ่งปันความรู้ไอทีจากศูนย์จนทำเป็น"
+    content="เขียนได้ทุกภาษา แต่จำโค้ดไม่ได้เลย — พัฒนาเว็บไซต์ ระบบภายในองค์กร เชื่อมต่อระบบ และแบ่งปันความรู้ไอทีจากศูนย์จนทำเป็น"
   >
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://voidfullstack.com">
@@ -32,9 +31,8 @@
     :root {
       --background: #07090d;
       --background-soft: #0c1017;
-      --surface: rgba(14, 19, 27, 0.78);
+      --surface: rgba(14, 19, 27, 0.8);
       --surface-solid: #0e131b;
-      --surface-hover: #121a24;
       --border: rgba(255, 255, 255, 0.09);
       --border-active: rgba(76, 255, 169, 0.38);
       --text: #f2f5f7;
@@ -44,10 +42,8 @@
       --cyan: #50d9ff;
       --purple: #aa87ff;
       --orange: #ffba69;
-      --danger: #ff6f91;
       --shadow: 0 28px 80px rgba(0, 0, 0, 0.42);
       --radius: 22px;
-      --radius-small: 14px;
       --container: 1180px;
       --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
       --font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -101,9 +97,7 @@
       text-decoration: none;
     }
 
-    button,
-    input,
-    textarea {
+    button {
       font: inherit;
     }
 
@@ -134,6 +128,8 @@
       transform: translateY(0);
     }
 
+    /* Navigation */
+
     .navigation {
       position: fixed;
       z-index: 1000;
@@ -148,7 +144,7 @@
     }
 
     .navigation.scrolled {
-      background: rgba(7, 9, 13, 0.82);
+      background: rgba(7, 9, 13, 0.84);
       border-color: var(--border);
       backdrop-filter: blur(18px);
     }
@@ -214,8 +210,8 @@
       outline: none;
     }
 
-    .nav-contact {
-      color: var(--green) !important;
+    .nav-links .nav-contact {
+      color: var(--green);
       border: 1px solid var(--border-active);
     }
 
@@ -229,6 +225,8 @@
       border: 1px solid var(--border);
       border-radius: 11px;
     }
+
+    /* Hero */
 
     .hero {
       display: grid;
@@ -351,9 +349,11 @@
       font-size: 0.76rem;
     }
 
+    /* Terminal */
+
     .terminal {
       overflow: hidden;
-      background: rgba(8, 12, 17, 0.88);
+      background: rgba(8, 12, 17, 0.9);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
@@ -395,7 +395,7 @@
     }
 
     .terminal-body {
-      min-height: 370px;
+      min-height: 400px;
       padding: 24px;
       font-family: var(--font-mono);
       font-size: 0.87rem;
@@ -441,6 +441,8 @@
       }
     }
 
+    /* Sections */
+
     .section {
       padding: 105px 0;
     }
@@ -473,11 +475,7 @@
       color: var(--muted);
     }
 
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 20px;
-    }
+    /* Cards */
 
     .card {
       position: relative;
@@ -493,7 +491,7 @@
     }
 
     .card:hover {
-      background: rgba(18, 25, 35, 0.9);
+      background: rgba(18, 25, 35, 0.92);
       border-color: rgba(76, 255, 169, 0.22);
       transform: translateY(-4px);
     }
@@ -516,6 +514,18 @@
       color: var(--muted);
     }
 
+    .card p + p {
+      margin-top: 15px;
+    }
+
+    /* About */
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
     .quote-card {
       display: flex;
       min-height: 100%;
@@ -528,6 +538,7 @@
 
     .big-quote {
       margin-bottom: 35px;
+      color: var(--text) !important;
       font-size: clamp(1.7rem, 3.5vw, 2.8rem);
       font-weight: 800;
       line-height: 1.2;
@@ -563,31 +574,24 @@
       font-weight: 700;
     }
 
-    .project-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
+    .skill-list {
+      margin-top: 18px;
+      list-style: none;
     }
 
-    .project-card {
-      min-height: 310px;
-    }
-
-    .project-number {
-      display: grid;
-      width: 42px;
-      height: 42px;
-      margin-bottom: 52px;
-      color: var(--green);
-      background: var(--green-soft);
-      border: 1px solid var(--border-active);
-      border-radius: 12px;
+    .skill-list li {
+      position: relative;
+      padding: 7px 0 7px 19px;
+      color: #b3bdc8;
       font-family: var(--font-mono);
-      place-items: center;
+      font-size: 0.82rem;
     }
 
-    .project-card h3 {
-      font-size: 1.3rem;
+    .skill-list li::before {
+      position: absolute;
+      left: 0;
+      color: var(--green);
+      content: ">";
     }
 
     .tag-list {
@@ -608,6 +612,8 @@
       font-size: 0.7rem;
     }
 
+    /* Projects */
+
     .notice {
       display: flex;
       gap: 12px;
@@ -625,14 +631,49 @@
       color: var(--orange);
     }
 
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .project-card {
+      min-height: 320px;
+    }
+
+    .project-number {
+      display: grid;
+      width: 42px;
+      height: 42px;
+      margin-bottom: 45px;
+      color: var(--green);
+      background: var(--green-soft);
+      border: 1px solid var(--border-active);
+      border-radius: 12px;
+      font-family: var(--font-mono);
+      place-items: center;
+    }
+
+    .project-card h3 {
+      font-size: 1.3rem;
+    }
+
+    /* Support and Stack */
+
+    .support-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
     .stack-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 18px;
     }
 
     .stack-card {
-      min-height: 300px;
+      min-height: 320px;
     }
 
     .stack-icon {
@@ -649,25 +690,7 @@
       place-items: center;
     }
 
-    .skill-list {
-      margin-top: 18px;
-      list-style: none;
-    }
-
-    .skill-list li {
-      position: relative;
-      padding: 7px 0 7px 19px;
-      color: #b3bdc8;
-      font-family: var(--font-mono);
-      font-size: 0.82rem;
-    }
-
-    .skill-list li::before {
-      position: absolute;
-      left: 0;
-      color: var(--green);
-      content: ">";
-    }
+    /* Current focus */
 
     .focus-panel {
       display: grid;
@@ -710,6 +733,8 @@
       font-size: 2rem;
     }
 
+    /* Local AI Lab */
+
     .lab-grid {
       display: grid;
       grid-template-columns: 0.9fr 1.1fr;
@@ -726,7 +751,6 @@
     }
 
     .phone {
-      position: relative;
       width: 220px;
       height: 310px;
       padding: 12px;
@@ -780,10 +804,6 @@
       font-size: clamp(1.8rem, 4vw, 3rem);
     }
 
-    .lab-content p {
-      margin-top: 18px;
-    }
-
     .lab-points {
       display: grid;
       gap: 10px;
@@ -805,11 +825,7 @@
       font-size: 0.79rem;
     }
 
-    .support-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
-    }
+    /* Contact */
 
     .contact-section {
       padding-bottom: 70px;
@@ -844,7 +860,7 @@
 
     .contact-panel h2 {
       position: relative;
-      max-width: 800px;
+      max-width: 850px;
       margin: 0 auto;
       font-size: clamp(2.3rem, 6vw, 5rem);
       line-height: 1.05;
@@ -855,11 +871,15 @@
       color: var(--green);
     }
 
-    .contact-panel > p {
+    .contact-description {
       position: relative;
-      max-width: 650px;
+      max-width: 700px;
       margin: 22px auto 0;
       color: var(--muted);
+    }
+
+    .contact-description + .contact-description {
+      margin-top: 14px;
     }
 
     .contact-items {
@@ -886,6 +906,8 @@
       border-color: var(--border-active);
     }
 
+    /* Footer */
+
     .footer {
       padding: 30px 0;
       color: #697482;
@@ -900,6 +922,8 @@
       gap: 20px;
     }
 
+    /* Animation */
+
     .reveal {
       opacity: 0;
       transform: translateY(22px);
@@ -913,9 +937,10 @@
       transform: translateY(0);
     }
 
+    /* Responsive */
+
     @media (max-width: 960px) {
       .hero-grid,
-      .about-grid,
       .lab-grid {
         grid-template-columns: 1fr;
       }
@@ -936,10 +961,6 @@
       .section-header {
         grid-template-columns: 1fr;
         gap: 18px;
-      }
-
-      .stack-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
       .phone-visual {
@@ -989,6 +1010,7 @@
         font-size: clamp(3rem, 16vw, 5rem);
       }
 
+      .about-grid,
       .project-grid,
       .stack-grid,
       .support-grid {
@@ -1032,9 +1054,9 @@
       }
 
       .terminal-body {
-        min-height: 340px;
+        min-height: 380px;
         padding: 18px;
-        font-size: 0.76rem;
+        font-size: 0.74rem;
       }
 
       .hero-actions .button {
@@ -1096,6 +1118,7 @@
       <ul class="nav-links" id="navLinks">
         <li><a href="#about">เกี่ยวกับ</a></li>
         <li><a href="#work">ผลงาน</a></li>
+        <li><a href="#support">IT Support</a></li>
         <li><a href="#stack">ความเชี่ยวชาญ</a></li>
         <li><a href="#lab">Void Lab</a></li>
         <li><a class="nav-contact" href="#contact">ทักมาคุยกัน</a></li>
@@ -1104,6 +1127,7 @@
   </nav>
 
   <main id="main">
+    <!-- Hero -->
     <header class="hero" id="home">
       <div class="container hero-grid">
         <div class="hero-content reveal">
@@ -1119,15 +1143,17 @@
 
           <p class="hero-description">
             พัฒนาเว็บไซต์ ระบบภายในองค์กร ฐานข้อมูล เซิร์ฟเวอร์
-            และแก้ปัญหาไอทีตั้งแต่หน้าจอผู้ใช้ไปจนถึงหลังบ้าน
+            และเชื่อมต่อระบบต่าง ๆ ตั้งแต่หน้าจอผู้ใช้ไปจนถึงหลังบ้าน
+            เป็นคนเรียนรู้เร็วและพร้อมทำความเข้าใจกับระบบใหม่
             เพราะเชื่อว่า <strong>การเขียนโปรแกรมทำได้แทบทุกอย่าง</strong>
-            ถ้าเรายังไม่หยุดค้นหาและลงมือทำ
+            ถ้าเรายังไม่หยุดค้นหา ทดลอง และลงมือทำ
           </p>
 
           <div class="hero-actions">
             <a class="button button-primary" href="#contact">
               เริ่มต้นโปรเจกต์ <span aria-hidden="true">→</span>
             </a>
+
             <a class="button button-secondary" href="#work">
               ดูงานที่ผ่านมา
             </a>
@@ -1150,47 +1176,77 @@
             <span class="terminal-line">
               <span class="code-green">$</span> whoami
             </span>
+
             <span class="terminal-line code-cyan">
               ชัยวัฒน์ รุจิเมธาภาส (เคน)
             </span>
+
             <br>
 
             <span class="terminal-line">
-              <span class="code-green">$</span> void --mission
+              <span class="code-green">$</span> void --capabilities
             </span>
-            <span class="terminal-line code-muted">
-              เรียนรู้ → ลงมือทำ → แก้ปัญหา → แบ่งปัน
+
+            <span class="terminal-line">
+              <span class="code-purple">learn_new_system</span>
+              <span class="code-muted">....</span>
+              <span class="code-green">fast</span>
             </span>
+
+            <span class="terminal-line">
+              <span class="code-purple">read_legacy_code</span>
+              <span class="code-muted">.....</span>
+              <span class="code-green">ready</span>
+            </span>
+
+            <span class="terminal-line">
+              <span class="code-purple">connect_systems</span>
+              <span class="code-muted">......</span>
+              <span class="code-green">ready</span>
+            </span>
+
+            <span class="terminal-line">
+              <span class="code-purple">remember_everything</span>
+              <span class="code-muted">..</span>
+              <span class="code-orange">false</span>
+            </span>
+
+            <span class="terminal-line">
+              <span class="code-purple">search_and_solve</span>
+              <span class="code-muted">.....</span>
+              <span class="code-green">true</span>
+            </span>
+
             <br>
 
             <span class="terminal-line">
               <span class="code-green">$</span> npm run everything
             </span>
+
             <span class="terminal-line">
               <span class="code-purple">frontend</span>
               <span class="code-muted">........</span>
               <span class="code-green">ready</span>
             </span>
+
             <span class="terminal-line">
               <span class="code-purple">backend</span>
               <span class="code-muted">.........</span>
               <span class="code-green">ready</span>
             </span>
+
             <span class="terminal-line">
               <span class="code-purple">database</span>
               <span class="code-muted">........</span>
               <span class="code-green">ready</span>
             </span>
-            <span class="terminal-line">
-              <span class="code-purple">server</span>
-              <span class="code-muted">..........</span>
-              <span class="code-green">ready</span>
-            </span>
+
             <span class="terminal-line">
               <span class="code-purple">coffee</span>
               <span class="code-muted">..........</span>
               <span class="code-orange">required</span>
             </span>
+
             <br>
 
             <span class="terminal-line">
@@ -1202,18 +1258,23 @@
       </div>
     </header>
 
+    <!-- About -->
     <section class="section" id="about">
       <div class="container">
         <div class="section-header reveal">
           <div>
             <p class="section-index">01 / ABOUT VOID</p>
-            <h2 class="section-title">พื้นที่ที่เริ่มจากศูนย์ แล้วค่อย ๆ ทำจนเป็น</h2>
+            <h2 class="section-title">
+              พื้นที่ที่เริ่มจากศูนย์ แล้วค่อย ๆ ทำจนเป็น
+            </h2>
           </div>
 
           <p class="section-intro">
             Void Full Stack คือพื้นที่ทำงาน ทดลอง และแบ่งปันความรู้ด้านไอที
-            เน้นการนำเทคโนโลยีมาแก้ปัญหาจริงแบบไม่ยึดติดกับภาษาใดภาษาหนึ่ง
-            งานเล็กหรืองานใหญ่ หากช่วยให้คนทำงานง่ายขึ้นก็น่าสนุกทั้งนั้น
+            เน้นการนำเทคโนโลยีมาแก้ปัญหาจริง เป็นคนเรียนรู้เร็ว
+            ถนัดด้านซอฟต์แวร์และการเชื่อมต่อระบบหลายรูปแบบ
+            รวมถึงสามารถศึกษาและรับช่วงแก้ไขโค้ดที่พัฒนาโดยโปรแกรมเมอร์คนเดิมได้
+            โดยไม่ยึดติดว่าทุกงานต้องเริ่มเขียนใหม่ตั้งแต่ศูนย์
           </p>
         </div>
 
@@ -1221,6 +1282,7 @@
           <article class="card quote-card reveal">
             <div>
               <p class="card-label">// PHILOSOPHY</p>
+
               <p class="big-quote">
                 “เขียนได้ทุกภาษา<br>
                 แต่<span>จำโค้ดไม่ได้เลย</span>”
@@ -1228,13 +1290,15 @@
             </div>
 
             <p>
-              ไม่จำเป็นต้องจำทุกคำสั่ง ขอแค่เข้าใจปัญหา รู้ว่าจะค้นหาอะไร
+              ไม่จำเป็นต้องจำทุกคำสั่ง ขอแค่เข้าใจปัญหา
+              รู้ว่าจะค้นหาอะไร เรียนรู้เครื่องมือได้เร็ว
               และอดทนพอที่จะทำให้มันใช้งานได้จริง
             </p>
           </article>
 
           <article class="card reveal">
             <p class="card-label">// PROFILE.JSON</p>
+
             <ul class="profile-list">
               <li>
                 <span>ชื่อ</span>
@@ -1249,6 +1313,10 @@
                 <span>Freelance Full Stack</span>
               </li>
               <li>
+                <span>จุดแข็ง</span>
+                <span>เรียนรู้เร็วและเชื่อมต่อระบบ</span>
+              </li>
+              <li>
                 <span>แนวทาง</span>
                 <span>สนุกกับงานและทำเต็มที่</span>
               </li>
@@ -1258,10 +1326,58 @@
               </li>
             </ul>
           </article>
+
+          <article class="card reveal">
+            <p class="card-label">// HOW_I_WORK.MD</p>
+            <h3>เรียนรู้ระบบเร็ว และไม่กลัวโค้ดที่คนอื่นเขียนไว้</h3>
+
+            <p>
+              ถนัดการเรียนรู้ซอฟต์แวร์ใหม่ การทำความเข้าใจกระบวนการทำงาน
+              และการเชื่อมต่อระบบต่าง ๆ เข้าด้วยกัน
+              หากเป็นระบบเดิมที่โปรแกรมเมอร์คนก่อนพัฒนาไว้
+              ก็สามารถไล่อ่านโค้ด วิเคราะห์ฐานข้อมูล
+              ตรวจสอบการทำงาน และรับช่วงแก้ไขหรือต่อยอดได้
+            </p>
+
+            <ul class="skill-list">
+              <li>เรียนรู้เครื่องมือและระบบใหม่ได้รวดเร็ว</li>
+              <li>วิเคราะห์โค้ดเดิมและโครงสร้างฐานข้อมูล</li>
+              <li>แก้ไขข้อผิดพลาดและเพิ่มความสามารถให้ระบบเดิม</li>
+              <li>เชื่อมต่อเว็บไซต์ API ฐานข้อมูล และระบบภายนอก</li>
+              <li>เลือกเครื่องมือให้เหมาะกับงานและงบประมาณ</li>
+            </ul>
+          </article>
+
+          <article class="card reveal">
+            <p class="card-label">// BUILT_WITH_AI</p>
+            <h3>ใช้ AI เป็นผู้ช่วย แต่คนยังต้องคิด ตรวจ และนำไปใช้จริง</h3>
+
+            <p>
+              เว็บไซต์นี้เป็นตัวอย่างของการนำ AI มาช่วยเขียนโค้ด
+              วางโครงสร้างเนื้อหา และปรับหน้าตาเว็บไซต์
+              จากนั้นจึงตรวจสอบ แก้ไข และนำขึ้นใช้งานจริงด้วย GitHub Pages
+              ซึ่งสามารถใช้โฮสต์เว็บไซต์ Static ได้ฟรี
+            </p>
+
+            <p>
+              แนวคิดสำคัญไม่ใช่การให้ AI ทำงานแทนทั้งหมด
+              แต่คือการใช้ AI ลดเวลาของงานซ้ำ
+              เพื่อให้มีเวลาทำความเข้าใจโจทย์ ตรวจสอบความถูกต้อง
+              และแก้ปัญหาที่เกิดขึ้นจริงมากขึ้น
+            </p>
+
+            <ul class="tag-list">
+              <li class="tag">AI-Assisted Coding</li>
+              <li class="tag">HTML / CSS / JavaScript</li>
+              <li class="tag">GitHub Pages</li>
+              <li class="tag">Static Hosting</li>
+            </ul>
+          </article>
         </div>
       </div>
     </section>
 
+    <!-- Work -->
     <section class="section" id="work">
       <div class="container">
         <div class="section-header reveal">
@@ -1272,7 +1388,8 @@
 
           <p class="section-intro">
             ผลงานส่วนใหญ่เป็นระบบที่พัฒนาตามความต้องการของลูกค้าแต่ละราย
-            ตั้งแต่เว็บไซต์บริษัทไปจนถึงระบบที่เชื่อมต่ออุปกรณ์และบริการคลาวด์
+            ตั้งแต่เว็บไซต์บริษัท แอปพลิเคชัน ไปจนถึงระบบที่เชื่อมต่อฐานข้อมูล
+            อุปกรณ์ เซิร์ฟเวอร์ และบริการคลาวด์
           </p>
         </div>
 
@@ -1280,7 +1397,8 @@
           <span aria-hidden="true">ⓘ</span>
           <p>
             <strong>หมายเหตุ:</strong>
-            งานทั้งหมดเป็นงานรับจ้างพัฒนาตามโจทย์ ไม่ใช่ซอฟต์แวร์สำเร็จรูปที่เปิดขายทั่วไป
+            ผลงานเป็นงานรับจ้างพัฒนาตามโจทย์ของลูกค้า
+            ไม่ใช่ซอฟต์แวร์สำเร็จรูปที่เปิดขายทั่วไป
           </p>
         </div>
 
@@ -1288,11 +1406,15 @@
           <article class="card project-card reveal">
             <span class="project-number">01</span>
             <h3>เว็บไซต์บริษัทและร้านค้า</h3>
+
             <p>
-              พัฒนาเว็บไซต์สำหรับสำนักงานบัญชี บริษัทต่อเติมและตกแต่งบ้านหรือสำนักงาน
-              ธุรกิจพัดลมไอเย็น อุปกรณ์เลี้ยงปลาสวยงาม และธุรกิจเสื้อผ้า
-              โดยเน้นข้อมูลอ่านง่าย รองรับมือถือ และดูแลต่อได้สะดวก
+              พัฒนาเว็บไซต์สำหรับสำนักงานบัญชี
+              บริษัทต่อเติมและตกแต่งบ้านหรือสำนักงาน
+              ธุรกิจพัดลมไอเย็น อุปกรณ์เลี้ยงปลาสวยงาม
+              และธุรกิจเสื้อผ้า โดยเน้นข้อมูลอ่านง่าย รองรับมือถือ
+              และดูแลต่อได้สะดวก
             </p>
+
             <ul class="tag-list">
               <li class="tag">Corporate Website</li>
               <li class="tag">Responsive</li>
@@ -1303,13 +1425,18 @@
           <article class="card project-card reveal">
             <span class="project-number">02</span>
             <h3>ระบบจองห้องประชุม</h3>
+
             <p>
-              จัดการตารางจองห้อง ตรวจสอบช่วงเวลาว่าง ออกใบเสนอราคาและใบเสร็จ
-              พร้อมบันทึกข้อมูลการชำระเงิน เพื่อช่วยลดขั้นตอนงานเอกสารและข้อมูลซ้ำซ้อน
+              จัดการตารางจองห้อง ตรวจสอบช่วงเวลาว่าง
+              ออกใบเสนอราคาและใบเสร็จ
+              พร้อมบันทึกข้อมูลการชำระเงิน
+              เพื่อช่วยลดขั้นตอนงานเอกสารและข้อมูลซ้ำซ้อน
             </p>
+
             <ul class="tag-list">
               <li class="tag">Booking</li>
               <li class="tag">Quotation</li>
+              <li class="tag">Receipt</li>
               <li class="tag">Payment</li>
             </ul>
           </article>
@@ -1317,28 +1444,36 @@
           <article class="card project-card reveal">
             <span class="project-number">03</span>
             <h3>ระบบเคส เคลม และงานซ่อม</h3>
+
             <p>
               บันทึกและติดตามสถานะเคส ตรวจสอบประวัติการเคลม
-              จัดทำใบเสนอราคาซ่อม และช่วยให้ทีมงานค้นหาข้อมูลย้อนหลังได้จากจุดเดียว
+              จัดทำใบเสนอราคาซ่อม
+              และช่วยให้ทีมงานค้นหาข้อมูลย้อนหลังได้จากจุดเดียว
             </p>
+
             <ul class="tag-list">
               <li class="tag">Case Tracking</li>
               <li class="tag">Claim</li>
               <li class="tag">Repair</li>
+              <li class="tag">Quotation</li>
             </ul>
           </article>
 
           <article class="card project-card reveal">
             <span class="project-number">04</span>
             <h3>ระบบอ่านป้ายทะเบียนรถ</h3>
+
             <p>
               อ่านข้อมูลป้ายทะเบียนจากวิดีโอที่บันทึกไว้
-              ประมวลผลผ่านบริการคลาวด์ และจัดเก็บรูปภาพ
-              เลขทะเบียน รวมถึงข้อมูลที่เกี่ยวข้องลงฐานข้อมูลสำหรับค้นหาในภายหลัง
+              ประมวลผลผ่านบริการคลาวด์
+              และจัดเก็บรูปภาพ เลขทะเบียน
+              รวมถึงข้อมูลที่เกี่ยวข้องลงฐานข้อมูลสำหรับค้นหาในภายหลัง
             </p>
+
             <ul class="tag-list">
               <li class="tag">Computer Vision</li>
               <li class="tag">Cloud API</li>
+              <li class="tag">Video Processing</li>
               <li class="tag">Database</li>
             </ul>
           </article>
@@ -1346,11 +1481,14 @@
           <article class="card project-card reveal">
             <span class="project-number">05</span>
             <h3>ระบบติดตามอุปกรณ์ด้วย Beacon</h3>
+
             <p>
-              รับข้อมูลจากอุปกรณ์ Beacon ผ่าน MQTT และแสดงผลบนแดชบอร์ด
-              รองรับ MAC Address, RSSI, Battery และ Timestamp
-              พร้อมระบุตำแหน่งข้อมูลบนแผนผังสำนักงาน
+              รับข้อมูลจากอุปกรณ์ Beacon ผ่าน MQTT
+              และแสดงผลบนแดชบอร์ด รองรับ MAC Address, RSSI,
+              Battery และ Timestamp
+              พร้อมแสดงข้อมูลตำแหน่งบนแผนผังสำนักงาน
             </p>
+
             <ul class="tag-list">
               <li class="tag">Beacon</li>
               <li class="tag">MQTT</li>
@@ -1362,20 +1500,75 @@
           <article class="card project-card reveal">
             <span class="project-number">06</span>
             <h3>ระบบเฉพาะทางตามกระบวนการทำงาน</h3>
+
             <p>
-              วิเคราะห์ปัญหาเดิมขององค์กรแล้วออกแบบระบบให้สอดคล้องกับขั้นตอนทำงานจริง
-              เน้นลดงานซ้ำ ลดความผิดพลาด และทำให้ข้อมูลที่กระจัดกระจายกลับมาใช้งานร่วมกันได้
+              วิเคราะห์ปัญหาเดิมขององค์กร
+              แล้วออกแบบระบบให้สอดคล้องกับขั้นตอนทำงานจริง
+              เน้นลดงานซ้ำ ลดความผิดพลาด
+              และทำให้ข้อมูลที่กระจัดกระจายกลับมาใช้งานร่วมกันได้
             </p>
+
             <ul class="tag-list">
               <li class="tag">Custom Software</li>
               <li class="tag">Automation</li>
               <li class="tag">Integration</li>
             </ul>
           </article>
+
+          <article class="card project-card reveal">
+            <span class="project-number">07</span>
+            <h3>Virtualization และระบบสำรองฐานข้อมูล</h3>
+
+            <p>
+              ติดตั้งและจัดการระบบ Virtualization ด้วย Hyper-V
+              และ VMware Workstation สำหรับแยกสภาพแวดล้อมของเซิร์ฟเวอร์
+              ระบบทดสอบ และโปรแกรมที่มีความต้องการแตกต่างกัน
+            </p>
+
+            <p>
+              เขียนสคริปต์สำหรับสำรองฐานข้อมูลตามเวลาที่กำหนด
+              จัดเก็บไฟล์สำรอง และส่งไฟล์ขึ้นพื้นที่ Cloud Storage
+              เพื่อช่วยลดความเสี่ยงเมื่อเครื่องหลักหรือระบบฐานข้อมูลมีปัญหา
+            </p>
+
+            <ul class="tag-list">
+              <li class="tag">Hyper-V</li>
+              <li class="tag">VMware Workstation</li>
+              <li class="tag">Virtual Machine</li>
+              <li class="tag">Backup Script</li>
+              <li class="tag">Cloud Storage</li>
+            </ul>
+          </article>
+
+          <article class="card project-card reveal">
+            <span class="project-number">08</span>
+            <h3>แอป Android คำนวณตัวเลขจากวันเกิด</h3>
+
+            <p>
+              พัฒนาแอปพลิเคชัน Android
+              สำหรับคำนวณตัวเลขจากวัน เดือน และปีเกิด
+              แล้วนำผลลัพธ์ไปแสดงเป็นข้อมูลตามเงื่อนไข
+              สูตร และชุดข้อความที่กำหนดไว้
+            </p>
+
+            <p>
+              ระบบครอบคลุมตั้งแต่การรับข้อมูลและตรวจสอบวันที่
+              การประมวลผลตามสูตร การเลือกชุดข้อมูลผลลัพธ์
+              ไปจนถึงการออกแบบหน้าจอให้ใช้งานบนโทรศัพท์ได้สะดวก
+            </p>
+
+            <ul class="tag-list">
+              <li class="tag">Android Application</li>
+              <li class="tag">Date Calculation</li>
+              <li class="tag">Business Logic</li>
+              <li class="tag">Mobile UI</li>
+            </ul>
+          </article>
         </div>
       </div>
     </section>
 
+    <!-- IT Support -->
     <section class="section" id="support">
       <div class="container">
         <div class="section-header reveal">
@@ -1385,8 +1578,9 @@
           </div>
 
           <p class="section-intro">
-            ให้บริการดูแลและให้คำปรึกษาด้านไอทีแก่สำนักงานบัญชีและบริษัททั่วไป
-            ทั้งการแก้ปัญหารายวัน การดูแลระบบ และการเชื่อมต่อสำหรับทำงานจากระยะไกล
+            ให้บริการดูแลและให้คำปรึกษาด้านไอทีแก่สำนักงานบัญชี
+            และบริษัททั่วไป ทั้งการแก้ปัญหารายวัน การดูแลระบบ
+            และการเชื่อมต่อสำหรับทำงานจากระยะไกล
           </p>
         </div>
 
@@ -1394,15 +1588,29 @@
           <article class="card reveal">
             <p class="card-label">// REMOTE SUPPORT</p>
             <h3>รีโมตตรวจสอบและแก้ไขปัญหา</h3>
+
             <p>
               ช่วยตรวจสอบปัญหาคอมพิวเตอร์และซอฟต์แวร์จากระยะไกล
-              ลดเวลารอและช่วยให้ผู้ใช้งานกลับมาทำงานต่อได้เร็วขึ้น
+              ลดเวลารอ และช่วยให้ผู้ใช้งานกลับมาทำงานต่อได้เร็วขึ้น
+            </p>
+          </article>
+
+          <article class="card reveal">
+            <p class="card-label">// LEGACY SYSTEM</p>
+            <h3>รับช่วงดูแลและแก้ไขระบบเดิม</h3>
+
+            <p>
+              ศึกษาโค้ดที่พัฒนาโดยโปรแกรมเมอร์คนเดิม
+              ตรวจสอบโครงสร้างโปรแกรมและฐานข้อมูล
+              เพื่อแก้ไขข้อผิดพลาด เพิ่มฟังก์ชัน
+              หรือช่วยให้ระบบเดิมกลับมาทำงานต่อได้
             </p>
           </article>
 
           <article class="card reveal">
             <p class="card-label">// DATABASE CARE</p>
             <h3>ดูแลรักษาฐานข้อมูล</h3>
+
             <p>
               ตรวจสอบการทำงาน สำรองข้อมูล แนะนำแนวทางจัดเก็บ
               และช่วยแก้ปัญหาที่เกิดขึ้นกับระบบฐานข้อมูลขององค์กร
@@ -1410,38 +1618,57 @@
           </article>
 
           <article class="card reveal">
+            <p class="card-label">// SYSTEM INTEGRATION</p>
+            <h3>เชื่อมต่อระบบและข้อมูล</h3>
+
+            <p>
+              เชื่อมต่อเว็บไซต์ API ฐานข้อมูล อุปกรณ์
+              และบริการภายนอก เพื่อให้ข้อมูลจากหลายระบบ
+              สามารถทำงานร่วมกันได้
+            </p>
+          </article>
+
+          <article class="card reveal">
             <p class="card-label">// NETWORK</p>
             <h3>ให้คำแนะนำด้านเครือข่าย</h3>
+
             <p>
               ตรวจสอบและให้คำแนะนำเกี่ยวกับระบบเครือข่ายภายใน
-              การเชื่อมต่ออินเทอร์เน็ต และการเข้าถึงทรัพยากรขององค์กร
+              การเชื่อมต่ออินเทอร์เน็ต
+              และการเข้าถึงทรัพยากรขององค์กร
             </p>
           </article>
 
           <article class="card reveal">
             <p class="card-label">// VPN & REMOTE DESKTOP</p>
             <h3>VPN และ Remote Desktop</h3>
+
             <p>
               ติดตั้งและตั้งค่าการเชื่อมต่อสำหรับทำงานจากภายนอก
-              โดยคำนึงถึงความสะดวก ความเหมาะสม และความปลอดภัยของระบบ
+              โดยคำนึงถึงความสะดวก ความเหมาะสม
+              และความปลอดภัยของระบบ
             </p>
           </article>
         </div>
       </div>
     </section>
 
+    <!-- Stack -->
     <section class="section" id="stack">
       <div class="container">
         <div class="section-header reveal">
           <div>
             <p class="section-index">04 / TOOLBOX</p>
-            <h2 class="section-title">พอทำได้หลายอย่าง แต่ยังไม่กล้าเก่งสักอย่าง</h2>
+            <h2 class="section-title">
+              พอทำได้หลายอย่าง แต่ยังไม่กล้าเก่งสักอย่าง
+            </h2>
           </div>
 
           <p class="section-intro">
             ผ่านการทำงานกับหลายระบบ หลายภาษา และหลายฐานข้อมูล
             ระดับความเชี่ยวชาญอาจไม่ถึงขั้นตอบได้ทุกอย่างโดยไม่เปิดเอกสาร
-            แต่พร้อมเรียนรู้ ค้นหา ทดลอง และรับผิดชอบจนงานเดินต่อได้
+            แต่พร้อมเรียนรู้ ค้นหา ทดลอง
+            และรับผิดชอบจนงานเดินต่อได้
           </p>
         </div>
 
@@ -1449,18 +1676,29 @@
           <article class="card stack-card reveal">
             <span class="stack-icon">OS</span>
             <h3>Server & Operating System</h3>
-            <p>เคยติดตั้ง ดูแล และแก้ปัญหาระบบเซิร์ฟเวอร์หลายสภาพแวดล้อม</p>
+
+            <p>
+              เคยติดตั้ง ดูแล และแก้ปัญหาระบบเซิร์ฟเวอร์
+              ในหลายสภาพแวดล้อม
+            </p>
+
             <ul class="skill-list">
               <li>Windows Server</li>
               <li>Ubuntu Linux Server</li>
               <li>Solaris Unix Server</li>
+              <li>Server Maintenance</li>
             </ul>
           </article>
 
           <article class="card stack-card reveal">
             <span class="stack-icon">DB</span>
             <h3>Database</h3>
-            <p>ออกแบบ เชื่อมต่อ ดูแล และแก้ปัญหาฐานข้อมูลตามรูปแบบของแต่ละงาน</p>
+
+            <p>
+              ออกแบบ เชื่อมต่อ ดูแล
+              และแก้ปัญหาฐานข้อมูลตามรูปแบบของแต่ละงาน
+            </p>
+
             <ul class="skill-list">
               <li>Oracle Database</li>
               <li>Microsoft SQL Server</li>
@@ -1473,7 +1711,12 @@
           <article class="card stack-card reveal">
             <span class="stack-icon">{ }</span>
             <h3>Programming</h3>
-            <p>เลือกภาษาและเครื่องมือให้เหมาะกับโจทย์ มากกว่าบังคับทุกงานให้ใช้ของเดิม</p>
+
+            <p>
+              เลือกภาษาและเครื่องมือให้เหมาะกับโจทย์
+              มากกว่าบังคับให้ทุกงานใช้เทคโนโลยีชุดเดียวกัน
+            </p>
+
             <ul class="skill-list">
               <li>C# / VB.NET</li>
               <li>PHP</li>
@@ -1482,10 +1725,31 @@
               <li>React / React Native</li>
             </ul>
           </article>
+
+          <article class="card stack-card reveal">
+            <span class="stack-icon">VM</span>
+            <h3>Virtualization & Backup</h3>
+
+            <p>
+              สร้างเครื่องเสมือนสำหรับระบบเซิร์ฟเวอร์
+              สภาพแวดล้อมทดสอบ และการแยกระบบตามลักษณะงาน
+              พร้อมเขียนสคริปต์ช่วยสำรองฐานข้อมูล
+            </p>
+
+            <ul class="skill-list">
+              <li>Microsoft Hyper-V</li>
+              <li>VMware Workstation</li>
+              <li>Virtual Machine Management</li>
+              <li>Database Backup Script</li>
+              <li>Scheduled Backup</li>
+              <li>Cloud Backup</li>
+            </ul>
+          </article>
         </div>
       </div>
     </section>
 
+    <!-- Current Focus -->
     <section class="section" id="focus">
       <div class="container">
         <div class="section-header reveal">
@@ -1496,8 +1760,8 @@
 
           <p class="section-intro">
             กำลังให้ความสำคัญกับการพัฒนาเว็บสมัยใหม่
-            โดยแยกส่วนหน้าบ้านและหลังบ้านให้ชัดเจน เพื่อดูแล ทดสอบ
-            และต่อยอดระบบได้สะดวกขึ้น
+            โดยแยกส่วนหน้าบ้านและหลังบ้านให้ชัดเจน
+            เพื่อดูแล ทดสอบ และต่อยอดระบบได้สะดวกขึ้น
           </p>
         </div>
 
@@ -1505,7 +1769,9 @@
           <div class="focus-side">
             <p class="focus-kicker">FRONTEND</p>
             <p class="focus-name">React + Vite</p>
-            <p class="focus-detail">JavaScript, Responsive UI และประสบการณ์ผู้ใช้</p>
+            <p class="focus-detail">
+              JavaScript, Responsive UI และประสบการณ์ผู้ใช้
+            </p>
           </div>
 
           <span class="focus-plus" aria-hidden="true">+</span>
@@ -1513,24 +1779,31 @@
           <div class="focus-side">
             <p class="focus-kicker">BACKEND</p>
             <p class="focus-name">Python</p>
-            <p class="focus-detail">API, Automation, Data Processing และ AI Integration</p>
+            <p class="focus-detail">
+              API, Automation, Data Processing และ AI Integration
+            </p>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- Local AI Lab -->
     <section class="section" id="lab">
       <div class="container">
         <div class="section-header reveal">
           <div>
             <p class="section-index">06 / VOID LAB</p>
-            <h2 class="section-title">เปลี่ยนมือถือเรือธงตกรุ่นให้เป็น AI ขนาดพกพา</h2>
+            <h2 class="section-title">
+              เปลี่ยนมือถือเรือธงตกรุ่นให้เป็น AI ขนาดพกพา
+            </h2>
           </div>
 
           <p class="section-intro">
-            งานอดิเรกที่กำลังทดลองคือการนำฮาร์ดแวร์เก่าที่ยังมีประสิทธิภาพ
-            กลับมาใช้ประโยชน์ ลดการพึ่งพาบริการคลาวด์
-            และเปิดโอกาสให้สร้างระบบ AI ที่ทำงานภายในอุปกรณ์ได้
+            งานอดิเรกที่กำลังทดลองคือการนำฮาร์ดแวร์เก่า
+            ที่ยังมีประสิทธิภาพกลับมาใช้ประโยชน์
+            ลดการพึ่งพาบริการคลาวด์
+            และเปิดโอกาสให้สร้างระบบ AI
+            ที่ทำงานภายในอุปกรณ์ได้
           </p>
         </div>
 
@@ -1553,28 +1826,45 @@
             <h3>Local AI ที่ไม่ต้องส่งข้อมูลทุกอย่างขึ้นคลาวด์</h3>
 
             <p>
-              ทดลองใช้ Samsung Z Fold 2 และ Z Fold 5 ซึ่งมี RAM 12GB
-              และชิป Snapdragon 8 Series เพื่อรันโมเดลภาษาภายในเครื่อง
-              ผ่าน Llama.cpp หรือ MNN-LLM รวมถึงปรับแต่งโมเดลให้เหมาะกับอุปกรณ์
+              ทดลองใช้ Samsung Z Fold 2 และ Z Fold 5
+              ซึ่งมี RAM 12GB และชิป Snapdragon 8 Series
+              เพื่อรันโมเดลภาษาภายในเครื่องผ่าน Llama.cpp
+              หรือ MNN-LLM รวมถึงปรับแต่งโมเดล
+              ให้เหมาะกับข้อจำกัดของอุปกรณ์
             </p>
 
             <p>
-              เป้าหมายคือการต่อยอดไปสู่โปรเจกต์ AI ที่ประหยัดค่าใช้บริการ
-              ใช้งานแบบออฟไลน์ได้ และช่วยเพิ่มความเป็นส่วนตัวของข้อมูล
-              เช่น โปรแกรมสแกนและอ่านข้อความจากใบเสร็จสำหรับใช้งานฟรี
+              เป้าหมายคือการต่อยอดไปสู่โปรเจกต์ AI
+              ที่ประหยัดค่าใช้บริการ ใช้งานแบบออฟไลน์ได้
+              และช่วยเพิ่มความเป็นส่วนตัวของข้อมูล
+              เช่น โปรแกรมสแกนและอ่านข้อความจากใบเสร็จ
+              สำหรับนำไปใช้งานโดยไม่ต้องเสียค่าบริการ AI รายครั้ง
             </p>
 
             <ul class="lab-points">
-              <li><strong>01.</strong> ใช้ฮาร์ดแวร์เดิมให้เกิดประโยชน์สูงสุด</li>
-              <li><strong>02.</strong> ลดค่าใช้จ่ายบริการ AI ภายนอก</li>
-              <li><strong>03.</strong> ประมวลผลข้อมูลภายในอุปกรณ์</li>
-              <li><strong>04.</strong> ทดลองก่อน แล้วค่อยพัฒนาเป็นของที่ใช้ได้จริง</li>
+              <li>
+                <strong>01.</strong>
+                ใช้ฮาร์ดแวร์เดิมให้เกิดประโยชน์สูงสุด
+              </li>
+              <li>
+                <strong>02.</strong>
+                ลดค่าใช้จ่ายบริการ AI ภายนอก
+              </li>
+              <li>
+                <strong>03.</strong>
+                ประมวลผลข้อมูลภายในอุปกรณ์
+              </li>
+              <li>
+                <strong>04.</strong>
+                ทดลองก่อน แล้วค่อยพัฒนาเป็นสิ่งที่ใช้ได้จริง
+              </li>
             </ul>
           </article>
         </div>
       </div>
     </section>
 
+    <!-- Contact -->
     <section class="section contact-section" id="contact">
       <div class="container">
         <div class="contact-panel reveal">
@@ -1585,19 +1875,33 @@
             <span>ลองทักมาคุยกัน</span>
           </h2>
 
-          <p>
-            ปัจจุบันทำงานแบบฟรีแลนซ์ พร้อมรับฟังโจทย์ใหม่
+          <p class="contact-description">
+            ปัจจุบันทำงานแบบฟรีแลนซ์และพร้อมรับฟังโจทย์ใหม่
             ไม่ว่าจะเป็นเว็บไซต์ ระบบใช้งานภายใน งานฐานข้อมูล
-            ระบบเชื่อมต่ออุปกรณ์ หรือปัญหาไอทีที่ยังไม่แน่ใจว่าควรเริ่มตรงไหน
+            ระบบ Virtualization การสำรองข้อมูล การเชื่อมต่อ API
+            แอปพลิเคชัน หรือระบบเดิมที่ต้องการคนรับช่วงดูแล
+          </p>
+
+          <p class="contact-description">
+            หากยังไม่แน่ใจว่าต้องใช้ภาษาอะไร
+            หรือควรเริ่มจากตรงไหนก็ไม่เป็นไร
+            เล่าปัญหาที่พบมาได้
+            แล้วค่อยช่วยกันหาวิธีที่เหมาะกับงานและงบประมาณ
           </p>
 
           <div class="contact-items">
-            <!-- เปลี่ยน PHONE_NUMBER เป็นเบอร์โทรจริงก่อนเผยแพร่ -->
+            <!--
+              เปลี่ยน PHONE_NUMBER เป็นเบอร์โทรจริงแบบไม่มีช่องว่าง
+              ตัวอย่าง: tel:0812345678
+            -->
             <a class="contact-item" href="tel:PHONE_NUMBER">
               โทร: 0632378010
             </a>
 
-            <!-- เปลี่ยน EMAIL_ADDRESS เป็นอีเมลจริงก่อนเผยแพร่ -->
+            <!--
+              เปลี่ยน EMAIL_ADDRESS เป็นอีเมลจริง
+              ตัวอย่าง: mailto:hello@example.com
+            -->
             <a class="contact-item" href="mailto:EMAIL_ADDRESS">
               อีเมล: voidfullstack@gmail.com
             </a>
@@ -1613,8 +1917,13 @@
 
   <footer class="footer">
     <div class="container footer-inner">
-      <p>© <span id="currentYear"></span> Void Full Stack.</p>
-      <p>Designed & coded by Ken — with coffee, docs and search.</p>
+      <p>
+        © <span id="currentYear"></span> Void Full Stack.
+      </p>
+
+      <p>
+        Designed & coded by Ken — with AI, coffee, docs and search.
+      </p>
     </div>
   </footer>
 
@@ -1631,8 +1940,18 @@
       navigation.classList.toggle("scrolled", window.scrollY > 20);
     }
 
+    function closeMenu() {
+      navLinks.classList.remove("open");
+      menuButton.setAttribute("aria-expanded", "false");
+      menuButton.setAttribute("aria-label", "เปิดเมนู");
+      menuButton.textContent = "☰";
+    }
+
     updateNavigation();
-    window.addEventListener("scroll", updateNavigation, { passive: true });
+
+    window.addEventListener("scroll", updateNavigation, {
+      passive: true
+    });
 
     menuButton.addEventListener("click", () => {
       const isOpen = navLinks.classList.toggle("open");
@@ -1646,30 +1965,39 @@
     });
 
     navLinks.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", () => {
-        navLinks.classList.remove("open");
-        menuButton.setAttribute("aria-expanded", "false");
-        menuButton.setAttribute("aria-label", "เปิดเมนู");
-        menuButton.textContent = "☰";
-      });
+      link.addEventListener("click", closeMenu);
     });
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      {
-        threshold: 0.1,
-        rootMargin: "0px 0px -40px 0px"
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        closeMenu();
       }
-    );
+    });
 
-    revealElements.forEach((element) => observer.observe(element));
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.1,
+          rootMargin: "0px 0px -40px 0px"
+        }
+      );
+
+      revealElements.forEach((element) => {
+        observer.observe(element);
+      });
+    } else {
+      revealElements.forEach((element) => {
+        element.classList.add("visible");
+      });
+    }
   </script>
 </body>
 </html>
