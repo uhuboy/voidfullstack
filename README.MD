@@ -1,14 +1,21 @@
-<img
+<p align="center">
 
-  src="logo.svg"
+  <a href="https://voidfullstack.com/">
 
-  alt="Void Full Stack — เขียนได้ทุกภาษา แต่จำโค้ดไม่ได้เลย"
+    <img
 
-  width="480"
+      src="./Logo_Void_Full_Stack.svg"
 
-  height="120"
+      alt="Void Full Stack"
 
->
+      width="720"
+
+    >
+
+  </a>
+
+</p>
+
 
 # Void Full Stack
 
